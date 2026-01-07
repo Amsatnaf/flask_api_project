@@ -1,16 +1,10 @@
-
-# app/__init__.py
 from flask import Flask
 
 def create_app():
     app = Flask(__name__)
 
-    # registra o blueprint principal
     from .routes import main
     app.register_blueprint(main)
 
     return app
-
-# Expor objeto WSGI para "gunicorn app:app"
-app = create_app()
 
