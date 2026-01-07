@@ -19,5 +19,5 @@ EXPOSE 8080
 RUN chgrp -R 0 /opt/app-root && chmod -R g=u /opt/app-root
 
 # Servidor WSGI recomendado
-CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:8080", "app:app"]
+CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:8080", "wsgi:app"]
 

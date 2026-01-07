@@ -1,10 +1,22 @@
+
+# app/routes.py
 from flask import Blueprint, request, jsonify
 from .api_client import login, request_daily_graph
 from .symbols import symbols
 
 main = Blueprint("main", __name__)
 
-# Armazena o sessionId globalmente (simples para testes)
+# ✅ Rota de saúde: sempre 200
+@main.route("/healthz", methods=["GET"])
+def healthz():
+    return jsonify(status="ok"), 200
+
+# Opcional: criar "/" para testes (não obrigatório para probes)
+@main.route("/", methods=["GET"])
+def root():
+    return jsonify(service="flask-api-project"), 200
+
+# ---- suas rotas atuais ----
 session_id_global = {"sessionId": None}
 
 @main.route("/login", methods=["GET"])
@@ -29,4 +41,5 @@ def dailygraph_route():
         )
         results.append({symbol: result})
     return jsonify(results)
+
 
