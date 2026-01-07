@@ -1,0 +1,13 @@
+ * Serving Flask app 'app:create_app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://10.88.0.119:5000
+[33mPress CTRL+C to quit[0m
+10.37.0.5 - - [16/Jul/2025 15:06:53] "GET /login HTTP/1.1" 200 -
+10.37.0.5 - - [16/Jul/2025 15:07:08] "GET /dailygraph HTTP/1.1" 200 -
+10.37.0.5 - - [16/Jul/2025 15:07:37] "GET /dailygraph HTTP/1.1" 200 -
+10.37.0.5 - - [16/Jul/2025 15:08:00] "GET /dailygraph HTTP/1.1" 200 -
+10.37.0.5 - - [16/Jul/2025 15:08:15] "GET /dailygraph HTTP/1.1" 200 -
+10.37.0.5 - - [16/Jul/2025 15:08:32] "GET /dailygraph HTTP/1.1" 200 -
