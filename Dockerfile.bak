@@ -1,0 +1,25 @@
+# Usa uma imagem base leve com Python 3.11
+FROM python:3.11-slim
+
+# Define o diretório de trabalho dentro do container
+WORKDIR /app
+
+# Copia o arquivo de dependências e instala os pacotes
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copia o restante do código da aplicação
+COPY . .
+
+# Define variáveis de ambiente para o Flask
+ENV FLASK_APP=app:create_app
+ENV FLASK_RUN_HOST=0.0.0.0
+ENV FLASK_RUN_PORT=8080
+ENV FLASK_ENV=development
+
+# Expõe a porta usada pela aplicação Flask
+EXPOSE 8080
+
+# Comando para iniciar a aplicação
+CMD ["flask", "run"]
+

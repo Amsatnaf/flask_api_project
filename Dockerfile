@@ -1,25 +1,23 @@
-# Usa uma imagem base leve com Python 3.11
+
 FROM python:3.11-slim
 
-# Define o diretório de trabalho dentro do container
-WORKDIR /app
+WORKDIR /opt/app-root/src
 
-# Copia o arquivo de dependências e instala os pacotes
+# Dependências
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia o restante do código da aplicação
+# Código
 COPY . .
 
-# Define variáveis de ambiente para o Flask
-ENV FLASK_APP=app:create_app
-ENV FLASK_RUN_HOST=0.0.0.0
-ENV FLASK_RUN_PORT=5000
-ENV FLASK_ENV=development
+# Porta
+ENV PORT=8080
+EXPOSE 8080
 
-# Expõe a porta usada pela aplicação Flask
-EXPOSE 5000
+# Permissões para UID arbitrário (grupo root = 0)
+# Boa prática em OpenShift: permitir g=u no diretório da app
+RUN chgrp -R 0 /opt/app-root && chmod -R g=u /opt/app-root
 
-# Comando para iniciar a aplicação
-CMD ["flask", "run"]
+# Servidor WSGI recomendado
+CMD ["gunicorn", "-w", "2", "-b", "0.0.0.0:8080", "app:app"]
 
